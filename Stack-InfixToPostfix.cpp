@@ -58,7 +58,21 @@ string InfixToPostfix(string expression){
                 S.pop();
             }
             //S.pop();
-            if(IsPair(S.top(), expression[i])){
+	    if(S.empty()){
+                MisMatchMsg(expression[i]);
+
+                cout<<endl;
+                //char cont;
+                cout<<"Do You Want to Continue Ignoring Brackets Balance? [Y/N] : ";
+                cin>>cont;
+
+                if(cont == 'N'){
+                    cout<<endl<<"Wrong Expression!!!"<<endl<<"Brackets are not Balanced."<<endl;
+                    return "Cannot Evaluate Postfix";
+                }
+            }
+	    	
+            else if(IsPair(S.top(), expression[i])){
                 S.pop();
             }
             else{
@@ -125,6 +139,16 @@ void MisMatchMsg(char bracket){
     else if(bracket == '{' || bracket == '['){
         cout<<endl<<"\t\tMismatch of Copulation!!!"<<endl;
         cout<<"\n\t\tA \'"<<bracket<<"\' Must be Followed by \'"<<(char)(bracket+2)<<"\'"<<endl;
+    }
+	
+    else if(bracket == ')'){
+        cout<<endl<<"\t\tMismatch of Copulation!!!"<<endl;
+        cout<<"\t\tA \'"<<bracket<<"\' Must Have a Following \'"<<(char)(bracket-1)<<"\'"<<endl;
+    }
+
+    else if(bracket == '}' || bracket == ']'){
+        cout<<endl<<"\t\tMismatch of Copulation!!!"<<endl;
+        cout<<"\t\tA \'"<<bracket<<"\' Must Have a Following \'"<<(char)(bracket-2)<<"\'"<<endl;
     }
 }
 
